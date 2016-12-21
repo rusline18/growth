@@ -1,0 +1,198 @@
+body, html{
+	width: auto;
+	min-width: 200px;
+	font-family: Roboto, sans;
+	font-size: 16px;
+	padding: 0;
+	margin: 0;
+}
+header {
+	width: auto;
+	height: 50px;
+	border: 1px solid rgba(180, 180, 180, 0.5);
+	background: #f1f1f1;
+	position: relative;
+}
+header a{
+	text-decoration: none;
+}
+#logo{
+	padding-left: 1%;
+	font-size: 24px;
+	font-family: Castellar, sans-serif;
+	line-height: 50px;
+	float: left;
+}
+#logo a{
+	color: #3a8653;
+}
+#nav{
+	width: 97%;
+}
+#navName{
+	float: right;
+	line-height: 50px;
+}
+#navLogeout{
+	float: right;
+	margin-left: 1%;
+}
+#navLogeout input{
+	border: 1px solid rgba(179, 179, 179, 0);
+	background: #f1f1f1;
+	font-weight: 500;
+	font-size: 16px;
+	outline: none;
+	line-height: 46px;
+}
+#container {
+	width: 100%;
+}
+#LeftColumn{
+	width: 13%;
+	height: 100%;
+	float: left;
+	background: #f3f5f5;
+}
+#LeftColumn ul li{
+	list-style-type: none;
+	padding: 1.7%;
+}
+#LeftColumn ul li a {
+	text-decoration: none;
+	color: black;
+}
+#RighColumn{
+	width: 85%;
+	height: 100%;
+	float: left;
+	margin-left: 1%;
+}
+#RighColumn h1{
+	font-weight: 500;
+	margin-bottom: 5%;
+}
+.modalDialog{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 99999;
+	display: none;
+	pointer-events: none;
+}
+.modalDialog:target {
+	display: block;
+	pointer-events: auto;
+}
+.modalDialog>div{
+	width: 40%;
+	position: relative;;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+}
+.close{
+	color: #aaaaaa;
+	line-height: 25px;
+	right: -20px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	float: right;
+}
+#account{
+	width: 40%;
+	margin-right: 10%;
+	text-align-last: center;
+}
+#categoria{
+	margin: 4% 0;
+}
+.left{
+	float: left;
+	width: 50%;
+	text-align-last: center;
+}
+.right{
+	float: right;
+	width: 45%;
+	text-align-last: center;
+}
+#organizationBox{
+	text-align: center;
+	
+}
+#organizationBox select{
+	width: 60%;
+	text-align-last: center;
+	margin: 4% 0;
+}
+#dataBox{
+	margin-bottom: 4%;
+}
+#data{
+	margin-right: 3%;
+	width: 24%;
+}
+#message label{
+	float: left;
+	margin-right: 3%;
+}
+#add{
+	text-align: center;
+	margin-top: 4%;
+}
+#add input{
+	margin-right: 5%;
+}
+#accountBox{
+	margin: 5% 0;
+}
+#accountBox input{
+	margin-right: 10%;
+}
+#tableAccount{
+	width: 50%;
+	margin-top: 3%;
+}
+.add{
+	width: 30%;
+	padding: 2% 2% 2% 2%;
+	background: #83bb8d;
+	color: #fff;
+	font-size: 16px;
+	border: none;
+	letter-spacing: 0.8px;
+}
+#addText{
+	text-decoration: none;
+	color: #fff;
+	font-size: 18px;
+	background: #83bb8d;
+	padding: 1% 1% 1% 1%;
+}
+.cancel{
+	text-decoration: none;
+	color: #aaaaaa;
+	font-size: 18px;
+}
+
+table th{
+	text-align: left;
+}
+#divSubcat{
+	display: none;
+}
+#tableTransactions{
+	width: 100%;
+	margin-top: 2%;	
+}
+#controls{
+	margin-top: 2.5%;
+}
