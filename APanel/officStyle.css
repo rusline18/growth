@@ -196,3 +196,28 @@ table th{
 #controls{
 	margin-top: 2.5%;
 }
+#filter #filterButtom{
+	padding: 7px 10px 7px 10px;
+	margin-right: 10px;
+	background-color: #5a78ce;
+	color: #fff;
+	font-size: 16px;
+	border: none;
+}
+#filter label{
+	margin-right: 5px;
+	margin-left: 5px;
+}
+#filter #dataView{
+	text-align: center;
+	width: 100%;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+#filter #dataView span{
+	padding: 10px 30px 10px 30px;
+	border: 1px solid #83bb8d;
+	font-size: 18px;
+	text-align: center;
+	font-family: Times New Roman, serif;
+}

@@ -65,10 +65,10 @@
 								<option value="Перевод">Перевод</option>
 							</select>
 						</div>
-						<div id="categoria">
+						<div>
 							<div id="divCateg">
 								<select class="left" name="сategoria" id="idCateg" required>
-									<option value="0">Выберите категорию</option>
+									<option>Выберите категорию</option>
 									<?php foreach ($categoria as $categ): ?>
 										<option value="<?=$categ['idCateg']?>"><?=$categ['category']?></option>
 									<?php endforeach; ?>
@@ -108,16 +108,52 @@
 			<div id="controls">
 				<form id="form1" method="POST" action="transactions.php">
 				<!--Фильтр-->
-				<?php 
-					$transactions = filter($dateStart, $dateEnd); 
-					?>
+				<?php $transactions = filter($dateStart, $dateEnd); ?>
 					<div id="filter">
 						<div>
-							
-							<input type="date" name="fromDate">
-							<input type="date" name="beforeDate">							
+						 	<input type="submit" name="filter" id="filterButtom" value="Фильтровать">
+							<label for="fromDate">От </label><input type="date" name="fromDate" id="fromDate"> 
+							<label for="beforeDate">До </label><input type="date" name="beforeDate" id="beforeDate">
 						</div>
-						<div><input type="submit" name="filter" value="Фильтровать"></div>
+						<div>
+							<select>
+								<option value="Доход">Доход</option>
+								<option value="Расход">Расход</option>
+								<option value="Перевод">Перевод</option>
+							</select>
+							<div>
+								<div>
+									<select class="left" name="сategoria" id="idCateg" required>
+										<option>Выберите категорию</option>
+										<?php foreach ($categoria as $categ): ?>
+											<option value="<?=$categ['idCateg']?>"><?=$categ['category']?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+								<div id="divSubcat">
+									<select class="right" name="subcategory" id="idSubCat" disabled required>
+									</select>
+								</div>
+							</div>
+							<label>Счет: </label>
+							<select name="account" id="filterAccount">
+							<?php 
+								$i=1;
+								while ($row=mysql_fetch_assoc($query)) {
+									echo "<option value=".$row['idScore'].">".$row['score']."</option>";
+									$i++;
+								}
+							?>
+							<input type="text" name="filterOrganiz" id="filterOrganiz" list="organList" placeholder="Организация">
+							<datalist id="organList">
+								<?php foreach ($organization as $organ): ?>
+									<option value="<?=$organ['organization']?>"></option>
+								<?php endforeach; ?>
+							</datalist>
+						</div>
+						<div id="dataView">
+							<?php dateView();?>
+						</div>
 					</div>
 					<table cellpadding="2" cellspacing="0" border="0" id="table_id" class="display">
 					<thead>

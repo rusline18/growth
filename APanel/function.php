@@ -76,12 +76,21 @@ function sendTransaction()
 		header("Location: transactions.php");
 	}
 }
+function dateView()
+{
+	$month_ru = array(1=>"Январь",2=>"Февраль",3=>"Марта",4=>"Апрель",5=>"Май",6=>"Июнь",7=>"Июль",8=>"Август",9=>"Сентябрь",10=>"Октябрь",11=>"Ноябрь",12=>"Декабрь"); 
+	if ($_POST['fromDate'] == 0 && $_POST['beforeDate']==0) {
+		echo "<span>".$month_ru[date("n")]." ".date("Y")."</span>";
+	} else {
+		echo "<span>".date("d",strtotime($_POST["fromDate"]))." ".$month_ru[date("n", strtotime($_POST["fromDate"]))]." ".date("Y",strtotime($_POST["fromDate"]))." - ".date("d",strtotime($_POST["beforeDate"]))." ".$month_ru[date("n", strtotime($_POST["beforeDate"]))]." ".date("Y",strtotime($_POST["beforeDate"]))."</span>";
+	}
+}
+
 //Фильтры
 function filter($dateStart, $dateEnd = null)
 {
 	session_start();
 	$idUser=$_SESSION['id'];
-	require_once "../verification/connect.php";
 	if (isset($_POST['filter'])) {
 		$dateStart = $_POST['fromDate'];
 		$dateEnd = $_POST['beforeDate'];
