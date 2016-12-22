@@ -56,6 +56,7 @@ function sendTransaction()
 {
 	session_start();
 	require "../verification/connect.php";
+
 	if (isset($_POST['add'])) 
 	{
 		$data=$_POST['data'];
@@ -76,18 +77,18 @@ function sendTransaction()
 	}
 }
 //Фильтры
-function filter(DateTime $dateStart, DateTime $dateEnd = null)
+function filter($dateStart, $dateEnd = null)
 {
 	session_start();
 	$idUser=$_SESSION['id'];
 	require_once "../verification/connect.php";
-	// if (isset($_POST['filter'])) {
-	// 	$dateStart = $_POST['fromDate'];
-	// 	$dateEnd = $_POST['beforeDate'];
-	// } else {
-	// 	$dateStart = date('Y-m-01');
-	// 	$dateEnd = date('Y-m-31');
-	// }
+	if (isset($_POST['filter'])) {
+		$dateStart = $_POST['fromDate'];
+		$dateEnd = $_POST['beforeDate'];
+	} else {
+		$dateStart = date('Y-m-01');
+		$dateEnd = date('Y-m-31');
+	}
 	$sqlTrans="SELECT transactions.typ, transactions.data, transactions.Sum,transactions.comment, score.score, Categoria.category, subcategory.subcategory, organization.organization  
 	FROM transactions 
 		LEFT JOIN score ON score.idScore = transactions.idScore
@@ -95,21 +96,8 @@ function filter(DateTime $dateStart, DateTime $dateEnd = null)
 		LEFT JOIN subcategory  ON subcategory.idSubCat = transactions.idSubCat 
 		LEFT JOIN organization ON organization.idOrg = transactions.idOrg 
 	WHERE 
-		transactions.idUser='$idUser' AND transactions.data>='{$dateStart->format("Y-m-d")}' AND transactions.data < '{$dateEnd->format("Y-m-d")}' ORDER BY transactions.data ASC";
+		transactions.idUser='$idUser' AND transactions.data>='$dateStart' AND transactions.data < '$dateEnd' ORDER BY transactions.data ASC";
 	$queryTrans=mysql_query($sqlTrans) or die(mysql_error());
-	// while ($rowTrans=mysql_fetch_array($queryTrans)) {
-	// 	echo "<tr>";
-	// 	echo "<td><input type='checkbox' name='cb' class ='qwe'></td>";
-	// 		echo "<td>".date('d.m', strtotime($rowTrans['data']))."</td>";
-	// 		echo "<td>".$rowTrans['typ']."</td>";
-	// 		echo "<td>".$rowTrans['score']."</td>";
-	// 		echo "<td>".$rowTrans['category']."</td>";
-	// 		echo "<td>".$rowTrans['subcategory']."</td>";
-	// 		echo "<td>".$rowTrans['organization']."</td>";
-	// 		echo "<td>".$rowTrans['Sum']."</td>";
-	// 		echo "<td>".$rowTrans['comment']."</td>";
-	// 	echo "</tr>";
-	// }
 	$transactions=array();
 	while($rowTrans = mysql_fetch_array($queryTrans))
 	{

@@ -19,17 +19,6 @@
 	$categoria = selectCateg();
 	$organization=selectOrganiz();
 	sendTransaction();
-		if (isset($_POST['week'])) {
-			$dateStart = new DateTime("last monday");
-			$dateEnd = new DateTime("next monday");
-		} elseif (isset($_POST['month'])) {
-			$dateStert = new DateTime("mignight first day of this month");
-			$dateEnd = new DateTime("mignight first day of next month");
-		} else {
-			$dateStart = new DateTime("first day of january");
-			$dateEnd = new DateTime("first day of january next year");
-		}
-	$transactions = filter($dateStart, $dateEnd);
 ?>
 <!DOCTYPE html>
 <html>
@@ -117,19 +106,16 @@
 				</div>
 			</div>
 			<div id="controls">
-				<form id="form1" method="POST" action="function.php">
+				<form id="form1" method="POST" action="transactions.php">
 				<!--Фильтр-->
+				<?php 
+					$transactions = filter($dateStart, $dateEnd); 
+					?>
 					<div id="filter">
 						<div>
-							<select name="date" id="select">
-								<option value="" selected="selected">Период</option>
-								<option value="week" id="week">Неделя</option>
-								<option value="month" id="month">Месяц</option>
-								<option value="year">Год</option>
-							</select>
-							<output><script>dateInput()</script></output>
-							<!-- <input type="date" name="fromDate">
-							<input type="date" name="beforeDate"> -->							
+							
+							<input type="date" name="fromDate">
+							<input type="date" name="beforeDate">							
 						</div>
 						<div><input type="submit" name="filter" value="Фильтровать"></div>
 					</div>
