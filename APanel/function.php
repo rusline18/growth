@@ -91,13 +91,7 @@ function filter($dateStart, $dateEnd = null)
 {
 	session_start();
 	$idUser=$_SESSION['id'];
-	if (isset($_POST['filter'])) {
-		$dateStart = $_POST['fromDate'];
-		$dateEnd = $_POST['beforeDate'];
-	} else {
-		$dateStart = date('Y-m-01');
-		$dateEnd = date('Y-m-31');
-	}
+
 	$sqlTrans="SELECT transactions.typ, transactions.data, transactions.Sum,transactions.comment, score.score, Categoria.category, subcategory.subcategory, organization.organization  
 	FROM transactions 
 		LEFT JOIN score ON score.idScore = transactions.idScore
