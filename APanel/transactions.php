@@ -108,7 +108,15 @@
 			<div id="controls">
 				<form id="form1" method="POST" action="transactions.php">
 				<!--Фильтр-->
-				<?php $transactions = filter($dateStart, $dateEnd); ?>
+				<?php
+				if (isset($_POST['filter'])) {
+					$dateStart = $_POST['fromDate'];
+					$dateEnd = $_POST['beforeDate'];
+				} else {
+					$dateStart = date('Y-m-01');
+					$dateEnd = date('Y-m-31');
+				}
+				$transactions = filter($dateStart, $dateEnd); ?>
 					<div id="filter">
 						<div>
 						 	<input type="submit" name="filter" id="filterButtom" value="Фильтровать">
