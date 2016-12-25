@@ -93,20 +93,11 @@ function filter($dateStart, $dateEnd, $typ, $categ, $account, $organ = null)
 	$idUser=$_SESSION['id'];
 	$where = [];
 	$where[] = isset($_POST['fromDate']) ? "transactions.data >='$fromDate'" : "transactions.data >= '".date('Y-m-01')."'";
-
-	switch (key($_POST)) {
-		case 'beforeDate':
-			$where[] = "transactions.data <'$beforedate'";
-		case 'filterTyp':
-			$where[] = "transactions.typ ='$typ'";
-		case 'filterCateg':
-			$where[] = "transactions.category ='$categ'";
-		case 'filterAccount':
-			$where[] = "score.score ='$account'";
-		case 'filterOrganiz':
-		$where[] = "organization.organization ='$organ'";
-	}
-	print_r($_POST);
+	$where[] = isset($_POST['fromDate']) ? "t.data <'$dateEnd'" : "t.data < '".date('Y-m-31')."'";
+	if(!empty($_POST['filterTyp'])) $where[]="t.typ ='$typ'";
+	if(!empty($_POST['filterCateg'])) $where[]="t.idCateg ='$categ'";
+	if(!empty($_POST['filterAccount'])) $where[]="t.idScore ='$account'";
+	if(!empty($_POST['filterOrganiz'])) $where[]="t.idOrg ='$organ'";
 	$sqlTrans="SELECT transactions.typ, transactions.data, transactions.Sum,transactions.comment, score.score, Categoria.category, subcategory.subcategory, organization.organization  
 	FROM transactions
 		LEFT JOIN score ON score.idScore = transactions.idScore
@@ -124,3 +115,4 @@ function filter($dateStart, $dateEnd, $typ, $categ, $account, $organ = null)
 	mysql_close();
 	return $transactions;
 }
+?>
