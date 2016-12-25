@@ -109,7 +109,6 @@
 				<form id="form1" method="POST" action="transactions.php">
 				<!--Фильтр-->
 				<?php
-				$filter="";
 				if (isset($_POST['filter'])) {
 					$dateStart = htmlspecialchars($_POST['fromDate']);
 					$dateEnd = htmlspecialchars($_POST['beforeDate']);
