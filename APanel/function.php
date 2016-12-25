@@ -87,19 +87,34 @@ function dateView()
 }
 
 //Фильтры
-function filter($dateStart, $dateEnd = null)
+function filter($dateStart, $dateEnd, $typ, $categ, $account, $organ = null)
 {
 	session_start();
 	$idUser=$_SESSION['id'];
+	$where = [];
+	$where[] = isset($_POST['fromDate']) ? "transactions.data >='$fromDate'" : "transactions.data >= '".date('Y-m-01')."'";
 
+	switch (key($_POST)) {
+		case 'beforeDate':
+			$where[] = "transactions.data <'$beforedate'";
+		case 'filterTyp':
+			$where[] = "transactions.typ ='$typ'";
+		case 'filterCateg':
+			$where[] = "transactions.category ='$categ'";
+		case 'filterAccount':
+			$where[] = "score.score ='$account'";
+		case 'filterOrganiz':
+		$where[] = "organization.organization ='$organ'";
+	}
+	print_r($_POST);
 	$sqlTrans="SELECT transactions.typ, transactions.data, transactions.Sum,transactions.comment, score.score, Categoria.category, subcategory.subcategory, organization.organization  
-	FROM transactions 
+	FROM transactions
 		LEFT JOIN score ON score.idScore = transactions.idScore
 		LEFT JOIN Categoria ON Categoria.idCateg = transactions.idCateg 
 		LEFT JOIN subcategory  ON subcategory.idSubCat = transactions.idSubCat 
 		LEFT JOIN organization ON organization.idOrg = transactions.idOrg 
 	WHERE 
-		transactions.idUser='$idUser' AND transactions.data>='$dateStart' AND transactions.data < '$dateEnd' ORDER BY transactions.data ASC";
+		transactions.idUser='$idUser' AND ( ".implode(' OR ', $where)." ) ORDER BY transactions.data ASC";
 	$queryTrans=mysql_query($sqlTrans) or die(mysql_error());
 	$transactions=array();
 	while($rowTrans = mysql_fetch_array($queryTrans))
