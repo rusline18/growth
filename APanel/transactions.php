@@ -109,14 +109,16 @@
 				<form id="form1" method="POST" action="transactions.php">
 				<!--Фильтр-->
 				<?php
+				$filter="";
 				if (isset($_POST['filter'])) {
-					$dateStart = $_POST['fromDate'];
-					$dateEnd = $_POST['beforeDate'];
-				} else {
-					$dateStart = date('Y-m-01');
-					$dateEnd = date('Y-m-31');
+					$dateStart = htmlspecialchars($_POST['fromDate']);
+					$dateEnd = htmlspecialchars($_POST['beforeDate']);
+					$typ = htmlspecialchars($_POST['filterTyp']);
+					$categ = htmlspecialchars($_POST['filterCateg']);
+					$account = htmlspecialchars($_POST['filterAccount']);
+					$organ = htmlspecialchars($_POST['filterOrganiz']);
 				}
-				$transactions = filter($dateStart, $dateEnd); ?>
+				$transactions = filter($dateStart, $dateEnd, $typ, $categ, $account, $organ); ?>
 					<div id="filter">
 						<div>
 						 	<input type="submit" name="filter" id="filterButtom" value="Фильтровать">
