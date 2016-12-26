@@ -121,8 +121,8 @@
 					<div id="filter">
 						<div>
 						 	<input type="submit" name="filter" id="filterButtom" value="Фильтровать">
-							<label for="fromDate">От </label><input type="date" name="fromDate" id="fromDate"> 
-							<label for="beforeDate">До </label><input type="date" name="beforeDate" id="beforeDate">
+							<label for="fromDate">От </label><input type="date" name="fromDate" id="fromDate" value="<?=$dateStart ?>" required> 
+							<label for="beforeDate">До </label><input type="date" name="beforeDate" id="beforeDate" value="<?=$dateEnd ?>" required>
 						</div>
 						<div>
 							<select>
