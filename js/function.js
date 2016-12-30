@@ -1,24 +1,21 @@
 function allCheckbox() 
 {
-	window.onload = function()
+	var f = document.getElementById('all');
+	f.onchange = function(e)
+	{
+		var el = e ? e.target : e.srcElement;
+		var qwe = el.form.getElementsByClassName('qwe');
+		for (var i =0; i<qwe.length; i++) 
 		{
-			var f = document.getElementById('form1');
-			f.cb_all.onchange = function(e)
+			if (el.checked) 
 			{
-				var el = e ? e.target : e.srcElement;
-				var qwe = el.form.getElementsByClassName('qwe');
-				for (var i =0; i<qwe.length; i++) 
-				{
-					if (el.checked) 
-					{
-						qwe[i].checked = true;
-					} else 
-					{
-						qwe[i].checked = false;
-					}
-				}
+				qwe[i].checked = true;
+			} else 
+			{
+				qwe[i].checked = false;
 			}
 		}
+	}
 }
 function sorter()
 {
