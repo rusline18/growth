@@ -115,4 +115,22 @@ function filter($dateStart, $dateEnd, $typ, $categ, $account, $organ = null)
 	mysql_close();
 	return $transactions;
 }
+function deletTrans()
+{
+	session_start();
+	$idUser=$_SESSION['id']; 
+	// require "../verification/connect.php";
+	$check = $_POST['check'];
+	$del = htmlspecialchars($_POST['delete']);
+	$DeletDate = time();
+	if (isset($del) && isset($check)) 
+	{
+		$items = [];
+		foreach ($check as $id) {
+			$items[] = intval($id);
+		}
+		$sqlDelet = "UPDATE transactions SET delet='1', dataDelet = '$DeletDate' WHERE idTrans IN (".implode(', ', $items).")";
+		$queryDelet = mysql_query($sqlDelet) or die(mysql_close());
+	}
+}
 ?>
