@@ -105,16 +105,11 @@
 					</form>
 				</div>
 			</div>
-			<form id="form1" method="POST" action="transactions.php">
 			<!--Удаление-->
-			<?php 
-				$items = deletTrans();
-			?>
-				<button id="delete" class="hidden" name="delete">Удалить</button>
-				<script>delet()</script>
-			<div id="controls">
-				<!--Фильтр-->
-				<?php
+			<?php deletTrans(); ?>
+			<!--Фильтр-->
+			<form id= "filter" method="POST" action="transactions.php">
+				<?php 
 				if (isset($_POST['filter'])) {
 					$dateStart = htmlspecialchars($_POST['fromDate']);
 					$dateEnd = htmlspecialchars($_POST['beforeDate']);
@@ -124,6 +119,11 @@
 					$organ = htmlspecialchars($_POST['filterOrganiz']);
 				}
 				$transactions = filter($dateStart, $dateEnd, $typ, $categ, $account, $organ); ?>
+			</form>
+			<form id="form1" method="POST" action="transactions.php">
+				<button id="delete" class="hidden" name="delete">Удалить</button>
+				<script>delet()</script>
+			<div id="controls">
 					<div id="filter">
 						<div>
 						 	<input type="submit" name="filter" id="filterButtom" value="Фильтровать">
