@@ -105,8 +105,14 @@
 					</form>
 				</div>
 			</div>
+			<form id="form1" method="POST" action="transactions.php">
+			<!--Удаление-->
+			<?php 
+				$items = deletTrans();
+			?>
+				<button id="delete" class="hidden" name="delete">Удалить</button>
+				<script>delet()</script>
 			<div id="controls">
-				<form id="form1" method="POST" action="transactions.php">
 				<!--Фильтр-->
 				<?php
 				if (isset($_POST['filter'])) {
@@ -181,7 +187,7 @@
 					<tbody>
 						<?php foreach ($transactions as $transact): ?>
 						<tr>
-							<td><input type="checkbox" name="cb" class ="qwe"></td>
+							<td><input type="checkbox" name="cb[]" class ="qwe" value="<?=$transact['idTrans']?>"></td>
 							<td><?=date('d.m', strtotime($transact['data']))?></td>
 							<td><?=$transact['typ']?></td>
 							<td><?=$transact['score']?></td>
